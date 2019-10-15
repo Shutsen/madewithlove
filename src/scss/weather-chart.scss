@@ -1,0 +1,7 @@
+.weather-chart {
+  canvas {
+    width: calc(100% - 48px);
+    max-width: calc(800px - 48px);
+    margin: 0 auto 40px;
+  }
+}

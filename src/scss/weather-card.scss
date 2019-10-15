@@ -1,0 +1,90 @@
+.weather-card {
+  width: calc(100% - 24px);
+  max-width: 800px;
+  padding: 10px;
+  margin: 0 12px 40px;
+  border: 1px solid black;
+  border-radius: 5px;
+
+  section:first-child {
+    text-align: center;
+  }
+
+  .city {
+    font-size: 1.5rem;
+  }
+
+  &.day {
+    background-color: skyblue;
+  }
+
+  &.night {
+    background-color: $color-black;
+    color: $color-white;
+
+    .table-caption {
+      color: $color-white;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    margin: 0 auto 40px;
+  }
+}
+
+.weather-summary {
+  padding: 12px 0;
+}
+
+.weather-measurements {
+  width: 100%;
+
+  table {
+    width: 100%;
+
+    .table-caption {
+      font-size: 0.6rem;
+      margin-top: 12px;
+      padding-left: 5px;
+      caption-side: bottom;
+      text-align: left;
+    }
+
+    tr {
+      th, td {
+        height: 30px;
+        padding: 5px;
+        font-size: 0.75rem;
+        line-height: 20px;
+        text-align: left;
+      }
+  
+      th {
+        text-transform: uppercase;
+      }
+
+      td {
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+}
+
+ul.weather-hourly {
+  display: flex;
+  overflow-x: auto;
+
+  .wh-item {
+    padding: 10px;
+    text-align: center;
+
+    figure, img {
+      text-align: center;
+      width: 50px;
+    }
+
+    .wh-temperature {
+      font-size: 0.75rem;
+    }
+  }
+}
