@@ -12,7 +12,7 @@ function WeatherHourlyInstance(props) {
     <div className="wh-item">
       <data>{hour}</data>
       <WeatherImage icon={data.icon}/>
-      <data className="wh-temperature">{data.temperature.toFixed()}&#176;</data>
+      <data className="wh-temperature">{data.temperature.toFixed()}°</data>
     </div>
   );
 }

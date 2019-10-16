@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Line as LineChart } from 'react-chartjs-2';
 import { toDateString } from '../utils/date'
+import i18next from 'i18next';
 
 function WeatherCharts(props) {
   const formatData = (key) => {
@@ -10,8 +11,13 @@ function WeatherCharts(props) {
 
     for (const item of props.weatherData.hourly.data) {
       const hour = toDateString(item.time, props.weatherData.timezone, 'ha');
-      // if we're dealing with percentage multiply by 100
-      const keyData = key.percentage ? (item[key.name] * 100).toFixed(2) : item[key.name].toFixed(2);
+      let keyData;
+      if (key.percentage) {
+        // if we're dealing with percentage multiply by 100
+        keyData = (item[key.name] * 100).toFixed(2);
+      } else {
+        keyData = item[key.name].toFixed(2);
+      } 
 
       labels.push(hour);
       data.push(keyData);
@@ -29,12 +35,12 @@ function WeatherCharts(props) {
   }
 
   const interestingGraphs = [
-    { name: 'temperature', title: 'Temperature (°C)' },
-    { name: 'humidity', title: 'Humidity (%)', percentage: true },
-    { name: 'pressure', title: 'Pressure (hPa)' },
-    { name: 'windSpeed', title: 'Wind speed (m/s)' },
-    { name: 'uvIndex', title: 'UV index' },
-    { name: 'visibility', title: 'Visibility (km)' }
+    { name: 'temperature', title: `${i18next.t("TEMPERATURE")} (°C)` },
+    { name: 'humidity', title: `${i18next.t("HUMIDITY")} (%)`, percentage: true },
+    { name: 'pressure', title: `${i18next.t("PRESSURE")} (hPa)` },
+    { name: 'windSpeed', title: `${i18next.t("WINDSPEED")} (°m/s)` },
+    { name: 'uvIndex', title: `${i18next.t("UV_INDEX")}` },
+    { name: 'visibility', title: `${i18next.t("VISIBILITY")} (km)` }
   ];
 
   const chartOptions = {

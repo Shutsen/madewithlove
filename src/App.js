@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import i18next from 'i18next';
 import LoadingView from './views/LoadingView';
 import UnsupportedView from './views/UnsupportedView';
 import AppView from './views/AppView';
@@ -12,12 +13,19 @@ class App extends Component {
     this.state = {
       weatherData: null,
       observedData: null,
-      lat: '',
-      lng: '',
+      lat: null,
+      lng: null,
+      lang: { id: 'en', name: 'English' },
+      metrics: { id: 'si', name: '°C, m/s'},
       isSupportedBrowser: true,
       isError: false,
       loaded: false
     };
+
+    this.handleDataChange = this.handleDataChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleLanguageChange = this.handleLanguageChange.bind(this);
+    this.handleMetricsChange = this.handleMetricsChange.bind(this);
   }
 
   componentDidMount() {
@@ -34,22 +42,33 @@ class App extends Component {
   }
 
   handleUnsupportedBrowser() {
-    this.setState({
-      isSupportedBrowser: false,
-      loaded: true
+    this.setState((state) => {
+      return {
+        ...state,
+        isSupportedBrowser: false,
+        loaded: true
+      }
     });
   }
 
-  async getData(lat, lng) {
+  async getData(lat, lng, lang, metrics) {
     if (!lat || !lng) {
       const response = await getClientPosition();
       lat = response.lat;
       lng = response.lng;
     }
 
-    const weatherData = await getWeatherData(lat, lng);
+    if (!lang) {
+      lang = this.state.lang.id;
+    }
 
-    this.setState({
+    if (!metrics) {
+      metrics = this.state.metrics.id;
+    }
+
+    const weatherData = await getWeatherData(lat, lng, lang, metrics);
+
+    this.updateState({
       weatherData,
       lat,
       lng,
@@ -60,15 +79,37 @@ class App extends Component {
   }
 
   handleDataChange(lat, lng) {
-    this.getData(lat, lng);
+    this.getData(lat, lng, null, null);
   }
 
   async handleDateChange(timestamp) {
-    const observedData = await getObservedData(this.state.lat, this.state.lng, timestamp);
+    const observedData = await getObservedData(this.state.lat, this.state.lng, this.state.lang.id, this.state.metrics.id, timestamp);
+    this.updateState({ observedData });
+  }
 
-    this.setState({
-      observedData
-    })
+  handleLanguageChange(lang) {
+    this.updateState({ lang });
+
+    i18next.changeLanguage(lang.id, (err, t) => {
+      if (err) return console.log('something went wrong loading', err);
+      t('key'); // -> same as i18next.t
+    });
+    
+    this.getData(this.state.lat, this.state.lng, lang.id, null);
+  }
+
+  handleMetricsChange(metrics) {
+    this.updateState({ metrics });
+    this.getData(this.state.lat, this.state.lng, null, metrics.id)
+  }
+
+  updateState(newData) {
+    this.setState((state) => {
+      return {
+        ...state,
+        ...newData
+      }
+    });
   }
 
   getView() {
@@ -87,8 +128,12 @@ class App extends Component {
     view = <AppView
             weatherData={this.state.weatherData}
             observedData={this.state.observedData}
-            onDataChange={this.handleDataChange.bind(this)}
-            onDateChange={this.handleDateChange.bind(this)}
+            onDataChange={this.handleDataChange}
+            onDateChange={this.handleDateChange}
+            onLanguageChange={this.handleLanguageChange}
+            selectedLanguage={this.state.lang}
+            onMetricsChange={this.handleMetricsChange}
+            selectedMetrics={this.state.metrics}
           />
     return view;
   }

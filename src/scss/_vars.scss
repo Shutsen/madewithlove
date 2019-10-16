@@ -1,5 +1,5 @@
 // colors
-$bg-color: #fff;
+$bg-color: #eee;
 
 $primary-color: rgba(0, 0, 0, .97);
 $secondary-color: red;
@@ -7,6 +7,7 @@ $secondary-color: red;
 $title-color: #3e3e3e;
 
 $color-white: #fff;
+$color-grey: #E2E2E4;
 $color-black: #1B1F1F;
 
 // typo
@@ -16,6 +17,9 @@ $font-size-h2: 2rem;
 $line-height-h1: 3rem;
 $line-height-h2: 3rem;
 $line-height: 2rem;
+
+// select-dropdown
+$select-dropdown-height: 30px;
 
 // datepicker
 $datepicker__background-color: #f0f0f0 !default;

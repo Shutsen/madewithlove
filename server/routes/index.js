@@ -1,22 +1,15 @@
-require('dotenv').config()
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
+const weather = require('../services/weather');
 const { escape } = require("validator")
 
 // Dark Sky API forecast request
-router.get('/darksky/:lat/:lng', async (req, res) => {
+router.get('/darksky/:lat/:lng/:lang/:metrics', async (req, res) => {
   const lat = escape(req.params.lat);
   const lng = escape(req.params.lng);
-  let weatherData;
-
-  try {
-    const response = await axios.get(`https://api.darksky.net/forecast/${process.env.DARK_SKY_API_KEY}/${lat},${lng}?units=auto`);
-    weatherData = response.data;
-  } catch(err) {
-    console.log('Error from darksky API: ', err);
-    throw err;
-  }
+  const lang = escape(req.params.lang);
+  const metrics = escape(req.params.metrics);
+  let weatherData = await weather.getForecast(lat, lng, lang, metrics);
 
   res.status(200).json({
     weatherData
@@ -24,19 +17,13 @@ router.get('/darksky/:lat/:lng', async (req, res) => {
 });
 
 // Dark Sky API time machine request
-router.get('/darksky/:lat/:lng/:date', async (req, res) => {
+router.get('/darksky/:lat/:lng/:lang/:metrics/:date', async (req, res) => {
   const lat = escape(req.params.lat);
   const lng = escape(req.params.lng);
+  const lang = escape(req.params.lang);
+  const metrics = escape(req.params.metrics);
   const date = escape(req.params.date);
-  let observedData;
-
-  try {
-    const response = await axios.get(`https://api.darksky.net/forecast/${process.env.DARK_SKY_API_KEY}/${lat},${lng},${date}?units=auto`);
-    observedData = response.data;
-  } catch(err) {
-    console.log('Error from darksky API: ', err);
-    throw err;
-  }
+  let observedData = await weather.getForecast(lat, lng, lang, metrics, date);
 
   res.status(200).json({
     observedData

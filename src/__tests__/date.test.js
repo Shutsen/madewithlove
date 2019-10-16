@@ -1,4 +1,4 @@
-import { toDateString, toMilitaryTime, isDayTime } from '../utils/date';
+import { toDateString, isDayTime } from '../utils/date';
 
 it('gets date string in correct format', () => {
   const timezone = 'Europe/Brussels'
@@ -27,9 +27,9 @@ it('gets date string in custom format specified', () => {
 it('gets military time correctly', () => {
   let timezone = 'Europe/Brussels'
   
-  let wakeUpTime = toMilitaryTime(1570945581, timezone);
-  let drillMoment = toMilitaryTime(1570957221, timezone);
-  let showerTime = toMilitaryTime(1571072433, timezone);
+  let wakeUpTime = toDateString(1570945581, timezone, 'HH:mm');
+  let drillMoment = toDateString(1570957221, timezone, 'HH:mm');
+  let showerTime = toDateString(1571072433, timezone, 'HH:mm');
 
   expect(wakeUpTime).toBe("07:46");
   expect(drillMoment).toBe("11:00");
@@ -38,9 +38,9 @@ it('gets military time correctly', () => {
   // same timestamps but switch timezone
   timezone = 'America/Yellowknife';
 
-  wakeUpTime = toMilitaryTime(1570945581, timezone);
-  drillMoment = toMilitaryTime(1570957221, timezone);
-  showerTime = toMilitaryTime(1571072433, timezone);
+  wakeUpTime = toDateString(1570945581, timezone, 'HH:mm');
+  drillMoment = toDateString(1570957221, timezone, 'HH:mm');
+  showerTime = toDateString(1571072433, timezone, 'HH:mm');
 
   expect(wakeUpTime).toBe("23:46");
   expect(drillMoment).toBe("03:00");

@@ -18,6 +18,8 @@ Run `npm install` to install all dependencies
 
 Add a .env file in the root directory with the following key-value pairs:
 
+PORT=3030
+
 DARK_SKY_API_KEY=<your_dark_sky_api_key>
 
 REACT_APP_GOOGLE_PLACES_API_KEY=<your_google_places_api_key>

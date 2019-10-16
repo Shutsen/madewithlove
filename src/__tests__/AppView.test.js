@@ -21,9 +21,16 @@ afterEach(() => {
 
 it("renders weather data passed by the parent", () => {
   const fakeWeatherData = dummyWeatherData;
+  const lang = { id: 'en', name: 'English' };
+  const metrics = { id: 'se', name: '°C, m/s' };
 
   act(() => {
-    render(<AppView weatherData={fakeWeatherData} />, container);
+    render(
+      <AppView
+        weatherData={fakeWeatherData}
+        selectedLanguage={lang}
+        selectedMetrics={metrics}
+      />, container);
   });
 
   expect(container.querySelector(".weather-card time").textContent).toBe("Sun Oct 13th 2019");

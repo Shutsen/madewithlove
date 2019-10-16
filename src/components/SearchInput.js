@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Script from 'react-load-script';
+import i18next from 'i18next';
 
 class SearchInput extends Component {
 constructor(props) {
@@ -21,7 +22,7 @@ constructor(props) {
     this.setState({ query: event.target.value })
   }
 
-  handleScriptLoad() { 
+  handleScriptLoad() {
     // Declare Options For Autocomplete 
     var options = { types: ["(cities)"] }; 
     
@@ -39,10 +40,14 @@ constructor(props) {
   }
 
   async handlePlaceSelect() {
-
     // Extract City From Address Object
     let addressObject = this.autocomplete.getPlace();
     let address = addressObject.address_components;
+
+    if (!address) {
+      return
+    }
+
     let latitude = addressObject.geometry.location.lat();
     let longitude = addressObject.geometry.location.lng();
 
@@ -60,11 +65,11 @@ constructor(props) {
 
   render() {
     return (
-      <form role="search" className="search-form">
+      <form role="search" className="search-form" onSubmit={e => e.preventDefault()}>
         <label htmlFor="search-input">
-          Search a city
+          {i18next.t("SEARCH_A_CITY")}
         </label>
-        <input id="search-input" type="search" placeholder="Really, any city" aria-labelledby="search-input"
+        <input id="search-input" type="search" placeholder={i18next.t("SEARCH_A_CITY_PLACEHOLDER")} aria-labelledby="search-input"
           value={this.state.query} onChange={this.handleChange} tabIndex="1"
         />
         <Script url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}&libraries=places`} onLoad={this.handleScriptLoad}/>   

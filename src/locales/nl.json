@@ -1,0 +1,19 @@
+{
+  "SEARCH_A_CITY": "Zoek een stad",
+  "SEARCH_A_CITY_PLACEHOLDER": "Eender welke...",
+  "VIEW_PAST_OR_FUTURE_WEATHER": "Nieuwsgierig naar het voorbije weer of hetgeen er aan komt?",
+  "SELECT_DATE": "Selecteer een datum",
+  "SUNRISE": "Zonsopgang",
+  "SUNSET": "Zonsondergang",
+  "CHANCE_OF_RAIN": "Kans op regen",
+  "HUMIDITY": "Luchtvochtigheid",
+  "WINDSPEED": "Windsnelheid",
+  "FEELS_LIKE": "Gevoelstemperatuur",
+  "UV_INDEX": "UV index",
+  "PRESSURE": "Luchtdruk",
+  "TEMPERATURE": "Temperatuur",
+  "DATA_SOURCE": "Data bron",
+  "LOADING": "Loading",
+  "MADE_WITH_LOVE": "Made with love",
+  "AND_A_KEYBOARD": "and a keyboard"
+}

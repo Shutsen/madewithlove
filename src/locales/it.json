@@ -1,0 +1,19 @@
+{
+  "SEARCH_A_CITY": "Cerca una città",
+  "SEARCH_A_CITY_PLACEHOLDER": "Davvero, qualsiasi città",
+  "VIEW_PAST_OR_FUTURE_WEATHER": "Curioso del tempo passato o di quello che verrà dopo?",
+  "SELECT_DATE": "Seleziona una data",
+  "SUNRISE": "Alba",
+  "SUNSET": "Tramonto",
+  "CHANCE_OF_RAIN": "Possibilità di pioggia",
+  "HUMIDITY": "Umidità",
+  "WINDSPEED": "Velocità del vento",
+  "FEELS_LIKE": "Si sente come",
+  "UV_INDEX": "Indice UV",
+  "PRESSURE": "Pressione",
+  "TEMPERATURE": "Temperatura",
+  "DATA_SOURCE": "Origine dati",
+  "LOADING": "Caricamento in corso",
+  "MADE_WITH_LOVE": "Fatto con amore",
+  "AND_A_KEYBOARD": "e una tastiera"
+}
