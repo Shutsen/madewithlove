@@ -2,7 +2,9 @@
 
 ## Quick intro
 
-This project uses Google places API to get cities and their corresponding coordinates across the world.
+This project uses the following Google APIs (Places API && Maps JavaScript API) - make sure to activate these and get an API KEY
+
+to get cities and their corresponding coordinates across the world.
 
 These latitude & longitude coordinates are used to request weather information to the Dark Sky API.
 
