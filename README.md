@@ -1,4 +1,4 @@
-# Madewithlove technical assignment
+# Weather app based on the Dark Sky API
 
 ## Quick intro
 
